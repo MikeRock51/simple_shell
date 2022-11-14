@@ -11,6 +11,9 @@ int main(void)
 		printf("$ ");
 		command = _getline();
 
+		if (strcmp(command, "exit") == 0)
+			return (0);
+
 		cmd = malloc(sizeof(char*) * strlen(command));
 		if (cmd == NULL)
 		{
