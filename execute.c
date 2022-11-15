@@ -1,25 +1,24 @@
 #include "mesh.h"
 
-void execute(char **path, char **args)
+/*
+ * execute - Executes a given program
+ * @tokens: An array of command and arguments
+ */
+void execute(char **tokens)
 {
-	int ex, i = 0;
+	int ex;
 	pid_t child = fork();
 
 	if (child == 0)
 	{
-		ex = execve(path[0], args, environ);
+		ex = execve(tokens[0], tokens, environ);
+		
 		if (ex == -1)
-		{
-			while (args[i])
-			{
-				printf("%s\n", args[i]);
-				i++;
-			}
 			perror("Execution error");
-		}
 	}
 	else
 	{
 		wait(NULL);
+		_getline();
 	}
 }

@@ -12,8 +12,8 @@
 extern char **environ;
 
 char *_getline();
-char **split_line(char *cmd);
-void execute(char **tokens);
-void path_stat(char *token, char **tokens);
+char **split_line(char *line);
+void execute(char **path);
+char *path_stat(char *cmd);
 
 #endif

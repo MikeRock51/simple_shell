@@ -1,43 +1,43 @@
 #include "mesh.h"
 
-char **path_stat(char *cmd)
+/*
+ * path_stat - Prepares user command for execution.
+ * @token: User command to prepare.
+ * @tokens: Arguments to command.
+ */
+void path_stat(char *token, char **tokens)
 {
-	struct stat st;
-	char *key = "PATH", *env = NULL, *path = NULL, *bs_path = malloc(sizeof(char*) * strlen(cmd) + 1), *argv[1]; 
+	struct stat status;
+	char *env, *key = "PATH", *path;
 	int i = 0;
 
 	while (environ[i])
 		i++;
 
-	env = malloc(sizeof(char) * 4);
+	env = malloc(sizeof(char*) * i);
+
 	i = 0;
-	while (environ [i])
+	while (environ[i])
 	{
 		if (strncmp(environ[i], key, 4) == 0)
 		{
-			env = environ[i];
+			env = strdup(environ[i]);
 			break;
 		}
 		i++;
 	}
-
-	path = malloc(sizeof(char) * strlen(env) - 5);
-	strtok(env, "=");
-
-	path = strtok(NULL, "=");
-
-	path = strtok(path, ":");
-
-	bs_path = strcat("/", *cmd);
-
-	while (path)
+	env = strtok(env, "="),	env = strtok(NULL, "="), env = strtok(env, ":");
+	while (env)
 	{
-		if (stat(strcat(path, bs_path), &st) == 0)
+		path = malloc(sizeof(char*) * strlen(env) + strlen(token) + 1);
+		strcat(path, env), strcat(path, "/"), strcat(path, token);
+		if (stat(path, &status) == 0)
 		{
-			argv[0] = path;
-			return (argv);
+			tokens[0] = path;
+			execute(tokens);
 		}
-		path = strtok(path, ":");
+		env = strtok(NULL, ":");
 	}
-	perror("File doesn't exist");
+	perror("No such command");
+	_getline();
 }

@@ -1,32 +1,40 @@
 #include "mesh.h"
 
-char **split_line(char *line)
+/*
+ * split_line - Breaks command into different strings using a delimiter
+ * @cmd: command to split
+ *
+ */
+char **split_line(char *cmd)
 {
-	char **tokens;
-	size_t capacity = 20, i = 0;
-	char *delimiter = " \n", *token;
+	char **tokens = NULL, *token = NULL, *cmd_cpy = malloc(sizeof(char) * strlen(cmd)), *delim = " \n";
+	int argc = 0, i = 0;
 
-	tokens = malloc(sizeof(char*) * capacity);
-	if (tokens == NULL)
+	strcpy(cmd_cpy, cmd);
+
+	token = strtok(cmd_cpy, delim);
+	while(token)
 	{
-		perror("malloc failed");
-		return (NULL);
+		argc++;
+		token = strtok(NULL, delim);
 	}
 
-	token = strtok(line, delimiter);
+	tokens = malloc(sizeof(char*) * argc);
+	token = strdup(cmd);
+	token = strtok(token, delim);
 
 	while (token)
 	{
+		tokens[i] = malloc(sizeof(char) * strlen(token));
 		tokens[i] = token;
+		token = strtok(NULL, delim);
 		i++;
-
-		if (i >= capacity)
-		{
-			capacity *= 2;
-			token = realloc(tokens, capacity);
-		}
-		token = strtok(NULL, delimiter);
 	}
 	tokens[i] = NULL;
+
+	if (tokens[0][0] == '/')
+		execute(tokens);
+	else
+		path_stat(tokens[0], tokens);
 	return (tokens);
 }
