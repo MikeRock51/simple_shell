@@ -4,7 +4,7 @@ char **split_line(char *line)
 {
 	char **tokens;
 	size_t capacity = 20, i = 0;
-	char *delimiter = " ", *token;
+	char *delimiter = " \n", *token;
 
 	tokens = malloc(sizeof(char*) * capacity);
 	if (tokens == NULL)
@@ -27,5 +27,6 @@ char **split_line(char *line)
 		}
 		token = strtok(NULL, delimiter);
 	}
+	tokens[i] = NULL;
 	return (tokens);
 }
