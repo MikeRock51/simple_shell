@@ -1,5 +1,11 @@
 #include "mesh.h"
 
+/**
+ * main - entry point
+ *
+ *
+ * Return: 0 on success, 1 on error
+ */
 int main(void)
 {
 	char *command, *cmd;
@@ -14,7 +20,7 @@ int main(void)
 		if (strcmp(command, "exit") == 0)
 			return (0);
 
-		cmd = malloc(sizeof(char*) * strlen(command));
+		cmd = malloc(sizeof(char *) * strlen(command));
 		if (cmd == NULL)
 		{
 			perror("malloc fail");
