@@ -1,6 +1,6 @@
 #include "mesh.h"
 
-/*
+/**
  * main - Main entry of our shell
  *
  * Return: 0 on success
