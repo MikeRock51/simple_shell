@@ -19,9 +19,9 @@ void path_stat(char *token, char **tokens)
 	i = 0;
 	while (environ[i])
 	{
-		if (strncmp(environ[i], key, 4) == 0)
+		if (_strncmp(environ[i], key, 4) == 0)
 		{
-			env = strdup(environ[i]);
+			env = _strdup(environ[i]);
 			break;
 		}
 		i++;

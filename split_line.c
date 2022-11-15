@@ -7,10 +7,10 @@
  */
 char **split_line(char *cmd)
 {
-	char **tokens = NULL, *token = NULL, *cmd_cpy = malloc(sizeof(char) * strlen(cmd)), *delim = " \n";
+	char **tokens = NULL, *token = NULL, *cmd_cpy = malloc(sizeof(char) * _strlen(cmd)), *delim = " \n";
 	int argc = 0, i = 0;
 
-	strcpy(cmd_cpy, cmd);
+	_strcpy(cmd_cpy, cmd);
 
 	token = strtok(cmd_cpy, delim);
 	while(token)
@@ -19,8 +19,8 @@ char **split_line(char *cmd)
 		token = strtok(NULL, delim);
 	}
 
-	tokens = malloc(sizeof(char*) * argc);
-	token = strdup(cmd);
+	tokens = malloc(sizeof(char *) * argc);
+	token = _strdup(cmd);
 	token = strtok(token, delim);
 
 	while (token)
