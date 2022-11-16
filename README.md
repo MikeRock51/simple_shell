@@ -1,1 +1,1 @@
-Building a simple shell!
+Building our own functional shell
