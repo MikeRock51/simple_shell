@@ -1,13 +1,9 @@
 #include "mesh.h"
 
 /**
-<<<<<<< HEAD
- * main - Main entry of our shell
-=======
  * main - entry point
  * @ac: arg count
  * @av: arg vector
->>>>>>> a3894908408c223d31d071c89eacaec531a277f7
  *
  * Return: 0 on success, 1 on error
  */
